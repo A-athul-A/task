@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+ <div class="reg-div">
+      <form action="signup" method="post">
+        {% csrf_token %}
+
+        <h2 class="lab"> ✎ Sign up ✎</h2>
+        <br />
+
+        <label class="lab">Enter username</label><br>
+        <input type="text" class="inp" placeholder="eg:abc_abc" name="username"><br><br>
+
+        <label class="lab">Enter password</label><br>
+        <input type="password" class="inp" name="password" ><br><br>
+
+        <label class="lab">Confirm password</label><br>
+        <input type="password" class="inp" name="password1"><br><br>
+        <input type="submit" value="Sign up">
+
+
+      </form>
+      {% for msg in messages %}
+      <h3 style="color:white"> {{msg}}</h3>
+      {% endfor %}
+    </div>
+  {% endblock %}

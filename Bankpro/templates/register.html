@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+ <div class="reg-div">
+      <form action="register" method="post">
+        {% csrf_token %}
+
+        <h2 class="lab"> ✎ Register ✎</h2>
+        <br />
+        <div class="first">
+        <label class="lab">Enter name</label><br>
+        <input type="text" class="inp" placeholder="eg:abc_abc" name="name"><br><br>
+
+        <label class="lab">Date of birth</label><br>
+        <input type="date" class="inp" placeholder="" name="dob"><br><br>
+
+        <label class="lab">Gender</label><br>
+        <input type="radio" class="" placeholder="Male" name="gender" value="Male"><label class="lab">Male</label><br>
+        <input type="radio" class="" placeholder="" name="gender" value="Female"><label class="lab">Female</label><br>
+        <input type="radio" class="" placeholder="" name="gender" value="Other"><label class="lab">Other</label><br>
+        <br><br>
+
+        <label class="lab">Enter E-mail</label><br>
+        <input type="email" class="inp" placeholder="eg:abc@abc.com" name="mail"><br><br>
+
+        <label class="lab">Enter Mobile no.</label><br>
+        <input type="number" class="inp" name="mob" ><br><br>
+        </div>
+
+        <label class="lab">Address</label><br>
+        <input type="text" class="inp" name="address"><br><br>
+
+
+        <label class="lab">District</label><br>
+                
+          <select>  
+          <option value = "Kasargod" name="District"> Kasargod
+          </option>  
+          <option value = "Kannur" name="District"> Kannur
+          </option>  
+          <option value = "Kozhikode" name="District"> Kozhikode
+          </option>  
+          <option value = "Alappuzha" name="District"> Alappuzha
+          </option>
+          <option value = "Kollam" name="District"> Kollam
+          </option>
+          <option value = "Trivandrum" name="District"> Trivandrum
+          </option>    
+          </select>  <br><br>
+
+          <label class="lab">Branch</label><br>
+                <!-- kasargod -->
+          <select>  
+          <option value = "Hosdurg" name="branch"> Hosdurg
+          </option>  
+          <option value = "Uduma" name="branch"> Uduma
+          </option>  
+          <option value = "Puthur" name="branch"> Puthur
+          </option> 
+          <!-- kannur     -->
+          <option value = "Ezhimala" name="branch"> Ezhimala
+          </option>  
+          <option value = "Mattannur" name="branch"> Mattannur
+          </option>  
+          <option value = "Payyannur" name="branch"> Payyannur
+          </option>
+          <!-- Kozhikode     -->
+          <option value = "Manjeri" name="branch"> Manjeri
+          </option>  
+          <option value = "Mukkam" name="branch"> Mukkam
+          </option>  
+          <option value = "Koyilandi" name="branch"> Koyilandi
+          </option>
+           <!-- Alapuzha     -->
+           <option value = "Pathirapalli" name="branch"> Pathirapalli
+          </option>  
+          <option value = "Vattayal" name="branch"> Vattayal
+          </option>  
+          <option value = "Palakkulam" name="branch"> Palakkulam
+          </option>
+           <!-- Kollam     -->
+           <option value = "Bharath nagar" name="branch"> Bharath nagar
+          </option>  
+          <option value = "KB Nagar" name="branch"> KB Nagar
+          </option>  
+          <option value = "Mundakkal" name="branch"> Mundakkal
+          </option>
+           <!-- Trivandrum     -->
+           <option value = "Sreekaryam" name="branch"> Sreekaryam
+          </option>  
+          <option value = "Thumba" name="branch"> Thumba
+          </option>  
+          <option value = "Karyavattom" name="branch"> Karyavattom
+          </option>
+          </select>  
+          <br><br>
+
+        <label class="lab">Account type</label><br>
+        
+          <select>  
+          <option value = "Savings ac" name="actype"> Savings ac
+          </option>  
+          <option value = "Current ac" name="actype"> Current ac
+          </option>  
+          <option value = "Salary ac" name="actype"> Salary ac
+          </option>  
+          <option value = "Salary ac" name="actype"> Salary ac
+          </option>
+          <option value = "NRI ac" name="actype"> NRI ac
+          </option>    
+          </select>  
+        <br><br>
+
+        <label for="">Materials provide</label><br><br>
+        <input type="checkbox" id="" name="mp" value="Debit card">
+        <label for=""> Debit card</label><br>
+        <input type="checkbox" id="" name="mp" value="Credit card">
+        <label for=""> Credit card</label><br>
+        <input type="checkbox" id="" name="mp" value="Cheque book">
+        <label for=""> Cheque book</label><br><br>
+
+        <input type="submit" value="Submit & Logout">
+
+
+      </form>
+      {% for msg in messages %}
+      <h3 style="color:black"> {{msg}} <button><a href="/">Homepage</a></button></h3>
+      {% endfor %}
+    </div>
+
+  {% endblock %}
