@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from .models import Register
 
 
+
 # Create your views here.
 def login(request):
     if request.method == 'POST':
@@ -31,26 +32,32 @@ def signup(request):
         password = request.POST['password']
         cpassword = request.POST['password1']
         if password == cpassword:
-            if User.objects.filter(username=username).exists():
-                messages.info(request, 'Username already taken')
-                return redirect('signup')
-            else:
-                user = User.objects.create_user(
-                    username=username,
-                    password=password
-                )
-            user.save()
-            return redirect('login')
+            if username:
+                if User.objects.filter(username=username).exists():
+                    messages.info(request, 'Username already taken')
+                    return redirect('signup')
+                else:
+                    user = User.objects.create_user(
+                        username=username,
+                        password=password
+                    )
+                    if user is not None:
+                        user.save()
+                        return redirect('login')
+                    else:
+
+                        return redirect('signup')
+                user.save()
+                return redirect('login')
         else:
             messages.info(request, 'Password mismatch')
             return redirect('signup')
-        return redirect('/')
+        messages.info(request, "Please enter username and password")
 
     return render(request, 'signup.html')
 
 
 def register(request):
-    # reg = Register.objects.all()
     if request.method == "POST":
         name = request.POST.get('name', '')
         # age = request.POST.get()
@@ -58,28 +65,29 @@ def register(request):
         gender = request.POST.get('gender', '')
         mob = request.POST.get('mob', '')
         mail = request.POST.get('mail', '')
-        address = request.POST.get('address')
-        branch = request.POST.get('branch')
+        address = request.POST.get('address','')
+        branch = request.POST.get('branch','')
         district = request.POST.get('district','')
         actype = request.POST.get('actype', '')
         mp = request.POST.get('mp', '')
-        regi = Register(
-            name=name,
-            dob=dob,
-            gender=gender,
-            mob=mob,
-            mail=mail,
-            address=address,
-            branch=branch,
-            district=district,
-            actype=actype,
-            mp=mp,
-        )
-        regi.save()
-        details = Register.objects.all()
-        if details is not None:
+        if name and dob and gender and mob and mail and address and branch and district and actype and mp:
+            regi = Register(
+                name=name,
+                dob=dob,
+                gender=gender,
+                mob=mob,
+                mail=mail,
+                address=address,
+                branch=branch,
+                district=district,
+                actype=actype,
+                mp=mp,
+            )
+            regi.save()
             messages.info(request, "Application accepted")
             auth.logout(request)
+        else:
+            messages.info(request, "Please enter details")
     return render(request, 'register.html')
 
 
